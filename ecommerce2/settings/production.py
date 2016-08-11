@@ -36,9 +36,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__fil
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'csqwlmc8s55o($rt6ozh7u+ui9zb-et00w$d90j8$^!nvj41_r'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-
 ADMINS = (
         ("Justin", "codingforentrepreneurs@gmail.com"),
 
@@ -137,10 +134,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "assets", "static")
-# TODO(fuyong): What is this for?
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, "static_in_pro", "our_static"),
-)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "assets", "media")
 

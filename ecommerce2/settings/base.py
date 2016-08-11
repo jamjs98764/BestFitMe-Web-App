@@ -28,7 +28,10 @@ try:
 except KeyError:
     DJANGO_ENV = "development"
 
-DEBUG = (DJANGO_ENV != "production")
+# TODO(fuyong): This is clearly a hack. Fix this once I have sorted out
+# how django manages static files.
+DEBUG = True
+# DEBUG = (DJANGO_ENV != "production")
 
 ALLOWED_HOSTS = []
 

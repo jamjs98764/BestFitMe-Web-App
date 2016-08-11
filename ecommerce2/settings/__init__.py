@@ -1,11 +1,10 @@
 from .base import *
 
-
 try:
-    if DEBUG:
-        from .local import *
-    else:
+    if DJANGO_ENV == "production":
         from .production import *
+    else:
+        from .local import *
 
 except:
     pass
