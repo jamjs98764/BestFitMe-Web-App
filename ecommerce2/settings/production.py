@@ -59,26 +59,6 @@ to  send for you:
 https://accounts.google.com/displayunlockcaptcha
 '''
 
-
-
-# Application definition
-
-INSTALLED_APPS = (
-    #django app
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.sites',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    #third party apps
-    'crispy_forms',
-    'registration',
-    #my apps
-    'newsletter',
-)
-
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
