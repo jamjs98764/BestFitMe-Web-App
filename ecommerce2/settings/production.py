@@ -44,7 +44,9 @@ ADMINS = (
 
         )
 
-ALLOWED_HOSTS = ['cfedeploy.webfactional.com', 'trydjango.com', 'www.trydjango.com']
+ALLOWED_HOSTS = [
+    'bestfitmebeta.herokuapp.com'
+]
 #purchasing domain name http://name.com
 
 EMAIL_HOST = 'smtp.gmail.com'
