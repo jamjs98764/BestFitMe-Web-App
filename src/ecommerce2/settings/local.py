@@ -13,8 +13,8 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 
+# BASE_DIR: String
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-#root of project
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
@@ -121,21 +121,19 @@ USE_L10N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.8/howto/static-files/
+# /statics -> Things that will only be changed by our development cycle.
+# /media -> Things that are dynamic, but fall under the assets category.
 
 STATIC_URL = '/static/'
-
-STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_in_env", "static_root")
+STATIC_ROOT = os.path.join(BASE_DIR, "assets", "static")
     
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, "static_in_pro", "our_static"),
-    #os.path.join(BASE_DIR, "static_in_env"),
-    #'/var/www/static/',
-)
+    os.path.join(BASE_DIR, "static_in_pro", "our_static"),)
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_in_env", "media_root")
+MEDIA_ROOT = os.path.join(BASE_DIR, "assets", "media")
+print MEDIA_ROOT
+print STATIC_ROOT
 
 
 
@@ -155,20 +153,3 @@ BRAINTREE_PUBLIC = "qn3p5n7njksw47r3"
 BRAINTREE_PRIVATE = "d14ac944794c0df1c81991ecf49221ff"
 BRAINTREE_MERCHANT_ID = "n84nynknvzz3j3sz"
 BRAINTREE_ENVIRONEMNT = "Sandbox"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

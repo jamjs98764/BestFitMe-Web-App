@@ -10,6 +10,8 @@ from orders.views import (
                     OrderList, 
                     OrderDetail)
 
+# TODO(fuyong): Reorganize this mess.
+
 urlpatterns = [
     # Examples:
     url(r'^$', 'newsletter.views.home', name='home'),
@@ -32,6 +34,5 @@ urlpatterns = [
 
 ]
 
-if settings.DEBUG:
-	urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-	urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
