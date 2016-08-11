@@ -28,7 +28,7 @@ try:
 except KeyError:
     DJANGO_ENV = "development"
 
-DEBUG = DJANGO_ENV is not "production"
+DEBUG = (DJANGO_ENV != "production")
 
 ALLOWED_HOSTS = []
 
