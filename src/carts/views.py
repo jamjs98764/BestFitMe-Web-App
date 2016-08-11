@@ -254,20 +254,3 @@ class CheckoutFinalView(CartOrderMixin, View):
 	def get(self, request, *args, **kwargs):
 		return redirect("checkout")
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
