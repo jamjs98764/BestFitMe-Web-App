@@ -131,7 +131,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
-
+# TODO(fuyong): Use an actual static files FS.
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "assets", "static")
 MEDIA_URL = '/media/'
