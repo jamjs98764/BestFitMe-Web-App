@@ -142,8 +142,17 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "assets", "media")
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 
-#DJANGO REGISTRATION REDUX SETTINGS
+# DJANGO REGISTRATION REDUX SETTINGS
 ACCOUNT_ACTIVATION_DAYS = 7
 REGISTRATION_AUTO_LOGIN = True
 SITE_ID = 1
 LOGIN_REDIRECT_URL = '/'
+
+
+# TODO(fyquah): Use proper API Keys in actual deployment
+# Braintree Payments Details. Change environment below and the keys
+# in heroku config Vars. As of writing, the keys there are for the sandbox.
+BRAINTREE_PUBLIC = os.environ["BRAINTREE_PRIVATE"]
+BRAINTREE_PRIVATE = os.environ["BRAINTREE_PUBLIC"]
+BRAINTREE_MERCHANT_ID = os.environ["BRAINTREE_MERCHANT_ID"]
+BRAINTREE_ENVIRONEMNT = "Sandbox"
