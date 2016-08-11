@@ -132,8 +132,6 @@ STATICFILES_DIRS = (
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "assets", "media")
-print MEDIA_ROOT
-print STATIC_ROOT
 
 
 
