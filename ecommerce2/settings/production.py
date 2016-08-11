@@ -14,12 +14,15 @@ For more information on this file, see
 https://docs.djangoproject.com/en/1.8/topics/settings/
 
 For the full list of settings and their values, see
-https://docs.djangoproject.com/en/1.8/ref/settings/
+https://docs.djangoproject.com/en/2.8/ref/settings/
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 
+import dj_database_url
+
 from django.conf import settings
+
 
 if not settings.DEBUG:
 	import os
@@ -115,12 +118,7 @@ if not settings.DEBUG:
 	from .db_password import DBPASS
 
 	DATABASES = {
-	    'default': {
-	        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-	        'NAME': "mvpland",
-	        'USER': "cfedeploy",
-	        'PASSWORD': DBPASS,
-	    }
+            'default': dj_database_url.parse(os.environ["DATABASE_URL"], conn_max_age=600)
 	}
 
 
