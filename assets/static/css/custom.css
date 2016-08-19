@@ -1,25 +1,47 @@
 .text-align-center {
-	text-align: center;
+    text-align: center;
 }
 
 
 .og-price {
-	color:red;
-	text-decoration:line-through;
+    color:red;
+    text-decoration:line-through;
 }
 
 .fa-navbar-cart {
-	font-size: 18px;
+    font-size: 18px;
     vertical-align: middle;
 }
 
 
 .container-alert-flash {
-	position: absolute;
+    position: absolute;
     top: 10px;
     z-index: 50000;
     width: 100%;
     right: 0%;
     margin: 0px;
     display:none;
+}
+
+.centered {
+    text-align: center;
+}
+
+.slight-pad-right {
+    margin-right: 10px;
+}
+
+.slight-pad-left {
+    margin-left: 10px;
+}
+
+.form-spacing-gap {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    height: 0px;
+}
+
+.home-page-big-banner-form {
+    font-size: 30px;
 }

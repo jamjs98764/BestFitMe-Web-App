@@ -26,88 +26,93 @@
 {% endblock %}
 </style>
 
-    
-
-
 {% block content %}
 
-<div class='row'>
-<h3>Recommended Products</h3>
-{% include "products/products.html" with object_list=products col_class_set="col-sm-2" %}
+<div class="container">
+    <div class="jumbotron centered">
+        <div>
+            <h3>I am looking for a</h3>
+            <br />
+
+            <form class="home-page-big-banner-form form-inline">
+
+                <div class="form-group">
+                    <label class="slight-pad-right">a</label>
+                    <select class="form-control">
+                        <option>Life Insurance</option>
+                        <option>Health Insurance</option>
+                        <option>Alien-Invasion Insurance</option>
+                    </select>
+                    <label class="slight-pad-left">policy</label>
+                </div>
+                <div class="form-spacing-gap"></div>
+
+                <div class="form-group">
+                    <label class="slight-pad-right">that lasts for</label>
+                    <select class="form-control">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>forever</option>
+                    </select>
+                    <label class="slight-pad-left">years</label>
+                </div>
+                <div class="form-spacing-gap"></div>
+
+                <div class="form-group">
+                    <input type="submit" class="btn btn-large btn-primary"
+                            value="Get Recoommendations" />
+                </div>
+            </form>
+
+            {% if not request.user.is_authenticated %}
+                <div class="form-spacing-gap"></div>
+                    Want personalized recommendation? [LOGIN WITH FACEBOOK BUTTON HERE] !
+                </div>
+            {% endif %}
+
+        </div>
+    </div>
+
+    <div class="centered panel panel-default">
+        <div class="panel-body">
+            <div class="page-header">
+                <h3>Have a vague idea of a policy you are looking for?</h3>
+            </div>
+            <form>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search for policies" />
+                </div>
+
+                <div class="form-spacing-gap"></div>
+
+                <div class="form-group">
+                    <input type="submit" class="btn btn-success" value="Search" />
+                </div>
+                <a>Advanced search</a>
+            </form>
+        </div>
+    </div>
+
+    <div class='row'>
+        <div class="page-header">
+            <h3>Recommended Products</h3>
+        </div>
+
+        {% include "products/products.html" with object_list=products col_class_set="col-sm-2" %}
+    </div>
+
+    <div class='row'>
+        <div class="page-header">
+            <h3>Popular policies</h3>
+        </div>
+
+        {% include "products/products.html" with object_list=products2 %}
+    </div>
 
 </div>
-
-<div class='row'>
-<h3>Featured Products</h3>
-{% include "products/products.html" with object_list=products2 %}
-
-</div>
-
-
-<!-- 
- {% if request.user.is_authenticated %}
-<h1>You are logged in!</h1>
-
-	{% if queryset %}
-	<h2>Welcome Staff</h2>
-	<table class='table'>
-	{% for instance in queryset %}
-		<tr><td>{{ forloop.counter }}</td><td>{{ instance.email }}</td><td>{{ instance.full_name }}</td><td>{{ instance.timestamp|timesince }} ago</td></tr>
-		{% if instance.email == "abc@gmail.edu" %}
-		<tr><td>is equal</td></tr>
-		{% endif %}
-	{% endfor %}
-	</table>
-
-	{% endif %}
-
- {% else %}
-<div class="row">
-
-  <div class="col-sm-3 pull-right">
-  	
-			<p class='lead text-align-center'>{{ title }}</p>
-
-			<form method='POST' action=''>{% csrf_token %}
-			{{ form|crispy }}
-
-			<input class='btn btn-primary' type='submit' value='Sign Up' />
-
-			</form>
-	</div>
-
-	<div class='col-sm-3'>
-<p class='lead text-align-center'>Django &amp; Bootstrap</p>
-			<img src='{% static "img/marketing1.jpg" %}' class='img-responsive' />
-</div>
-
-<div class='col-sm-3'>
-<p class='lead text-align-center'>Created for Starters 
-<br/>
-<span class='fa-stack fa-lg fa-5x'>
-<i class='fa fa-comment-o fa-stack-2x'></i>
-<i style='color:yellow;' class="fa fa-bolt fa-stack-1x"></i>
-
-</span>
-</p>
-
-</div>
-
-<div class='col-sm-3'>
-<p class='lead text-align-center'>Always Open Source <br/><br/>
-
-<span class="fa-stack fa-lg fa-5x">
-<i class="fa fa-circle-o-notch fa-stack-2x"></i>
-
-  <i class="fa fa-github fa-stack-1x"></i>
-</span>
-</p>
-
-
-</div>
-
-
-</div>
-{% endif %} -->
 
 {% endblock %}
+
