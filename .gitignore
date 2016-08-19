@@ -9,3 +9,5 @@ lib/
 src/venv/
 venv/
 static/
+node_modules/
+assets/dist/

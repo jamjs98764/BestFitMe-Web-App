@@ -1,0 +1,27 @@
+{
+  "name": "webpack-with-common-libs",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "grunt"
+  },
+  "dependencies": {
+    "grunt": "~0.4.2",
+    "gulp-util": "~2.2.9",
+    "gulp": "~3.3.0",
+    "grunt-webpack": "~1.0.3",
+    "webpack": "~1.0.0-beta6",
+    "webpack-dev-server": "~1.2.0",
+    "matchdep": "~0.3.0",
+    "bootstrap": "https://github.com/twbs/bootstrap/archive/v3.0.2.tar.gz",
+    "bootstrap-webpack": "https://github.com/bline/bootstrap-webpack/archive/master.tar.gz",
+    "raw-loader": "~0.5.0",
+    "css-loader": "~0.6.6",
+    "url-loader": "~0.5.2",
+    "file-loader": "~0.5.0",
+    "style-loader": "~0.6.0",
+    "grunt-contrib-watch": "~0.5.3",
+    "react": "^0.10.0",
+    "jsx-loader": "^0.10.2"
+  }
+}
