@@ -5,6 +5,19 @@
 - Use 4 spaces in HTML (it is the django specs, HTML guide says 2, but let's follow django)
 - Use pylint (Ingore this for now).
 
+## Prerequistes:
+
+- node (>6.0.0) (install with [https://github.com/creationix/nvm](nvm), just install the latest version)
+- webpack and grunt's cli. Install with `npm install -g webpack webpack-dev-server grunt-cli`
+
+## Running the dev server:
+
+in two different terminals, run: `python manage.py runserver` and `grunt watch`
+
+## Deploying to heroku:
+
+TODO(fyquah): Write up about this.
+
 ## Products
 
 1. Products (physical)
