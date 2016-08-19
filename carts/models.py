@@ -57,7 +57,7 @@ class Cart(models.Model):
 		return str(self.id)
 
 	def update_subtotal(self):
-		print "updating..."
+		print("updating...")
 		subtotal = 0
 		items = self.cartitem_set.all()
 		for item in items:
@@ -71,7 +71,7 @@ class Cart(models.Model):
 def do_tax_and_total_receiver(sender, instance, *args, **kwargs):
 	subtotal = Decimal(instance.subtotal)
 	tax_total = round(subtotal * Decimal(instance.tax_percentage), 2) #8.5%
-	print instance.tax_percentage
+	print(instance.tax_percentage)
 	total = round(subtotal + Decimal(tax_total), 2)
 	instance.tax_total = "%.2f" %(tax_total)
 	instance.total = "%.2f" %(total)
