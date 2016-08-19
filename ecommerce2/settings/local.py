@@ -102,10 +102,14 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-# This is where django will collect all the static files to
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATICFILES_DIRS = (
-        os.path.join(BASE_DIR, "assets", "static"),)
+        # static assets that are provided by the original ecommerce template.
+        # and JS files that we wish to just copy and paste.
+        os.path.join(BASE_DIR, "assets", "static"),
+        # static assets that are provided by us via webpack.
+        os.path.join(BASE_DIR, "assets", "dist"))
+
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "assets", "media")

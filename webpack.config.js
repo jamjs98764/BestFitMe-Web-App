@@ -3,10 +3,10 @@ var webpack = require("webpack");
 module.exports = {
 	cache: true,
 	entry: {
-                home: "./assets/webpack/app/home.js",
+                home: "./assets/app/src/home.js",
 	},
 	output: {
-		path: path.join(__dirname, "assets/dist"),
+		path: path.join(__dirname, "assets/dist/app"),
 		filename: "[name].js",
 		chunkFilename: "[chunkhash].js"
 	},
