@@ -97,18 +97,18 @@ USE_L10N = True
 USE_TZ = True
 
 
-# /statics -> Things that will only be changed by our development cycle.
-# /media -> Things that are dynamic, but fall under the assets category.
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, "assets", "static")
-    
+
+# This is where django will collect all the static files to
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, "static_in_pro", "our_static"),)
+        os.path.join(BASE_DIR, "assets", "static"),)
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "assets", "media")
-
 
 
 #Crispy FORM TAGs SETTINGS
@@ -127,3 +127,6 @@ BRAINTREE_PUBLIC = "qn3p5n7njksw47r3"
 BRAINTREE_PRIVATE = "d14ac944794c0df1c81991ecf49221ff"
 BRAINTREE_MERCHANT_ID = "n84nynknvzz3j3sz"
 BRAINTREE_ENVIRONEMNT = "Sandbox"
+
+# Logging information.
+print("Running in local mode")

@@ -8,3 +8,4 @@ lib/
 *.swp
 src/venv/
 venv/
+static/
