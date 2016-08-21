@@ -58,15 +58,18 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    #third party apps
+
+    # third party apps
     'crispy_forms',
     'django_filters',
     'registration',
-    #my apps
+
+    # my apps
     'carts',
     'newsletter',
     'orders',
     'products',
+    "policies",
 )
 
 MIDDLEWARE_CLASSES = (
@@ -81,6 +84,11 @@ MIDDLEWARE_CLASSES = (
 )
 
 ROOT_URLCONF = 'ecommerce2.urls'
+
+TEMPLATE_LOADERS = (
+    'django.template.loaders.filesystem.Loader',
+    'django.template.loaders.app_directories.Loader',
+)
 
 TEMPLATES = [
     {
