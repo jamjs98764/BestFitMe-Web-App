@@ -6,7 +6,11 @@ from bestfit.recommender import question_dag
 
 from policies.recommender import health as recommender_health
 
-
+# TODO(fuyong): After writing this test, I realize that this
+# is not a good way to do a sanity test on whether the
+# transversal is working. There should be unit tests for
+# bestfit.recommender.{question_dag and DAG} as those
+# are the main providers of these graph data structures...
 class TestAnswerTransversal(unittest.TestCase):
 
     def setUp(self):
