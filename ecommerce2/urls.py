@@ -19,7 +19,7 @@ urlpatterns = [
     url(r'^about/$', 'ecommerce2.views.about', name='about'),
     # url(r'^blog/', include('blog.urls')),
 
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include('registration.backends.default.urls')),
     url(r'^products/', include('products.urls')),
     url(r'^categories/', include('products.urls_categories')),
@@ -31,7 +31,6 @@ urlpatterns = [
     url(r'^checkout/address/$', AddressSelectFormView.as_view(), name='order_address'),
     url(r'^checkout/address/add/$', UserAddressCreateView.as_view(), name='user_address_create'),
     url(r'^checkout/final/$', CheckoutFinalView.as_view(), name='checkout_final'),
-
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
