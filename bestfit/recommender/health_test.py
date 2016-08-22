@@ -1,10 +1,10 @@
-"""Unit test for policies.recommender.health."""
+"""Unit test for bestfit.recommender.health."""
 
 import unittest
 
 from bestfit.recommender import question_dag
+from bestfit.recommender import health as recommender_health
 
-from policies.recommender import health as recommender_health
 
 # TODO(fuyong): After writing this test, I realize that this
 # is not a good way to do a sanity test on whether the

@@ -34,7 +34,7 @@ def _construct_tree():
     exit_node = DAG.Node()
 
     n0_0.add_child(n1_0)
-    n1_0.add_child(n2_0)
+    n1_0.add_child(exit_node)
 
     n0_0.freeze_structure()
     n1_0.freeze_structure()
