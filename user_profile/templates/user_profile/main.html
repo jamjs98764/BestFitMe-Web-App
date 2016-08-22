@@ -1,192 +1,10 @@
-<?php
-//include("files/config-tch.php");
-//include("files/".$header_file_name);
+{% extends "base.html" %}
 
-include_once("facebook/configfb2.php");
-include_once("facebook/functions.php");
+{% block content %}
 
-		  //destroy facebook session if user clicks reset
-		  $output = '';
-if(!$fbuser){
-	$fbuser = null;
-
-	$loginUrl = $facebook->getLoginUrl(array('redirect_uri'=>$homeurl,'scope'=>$fbPermissions));
-	$output = '<a href="'.$loginUrl.'"><img src="images/fb-autofill.png" height="45px" width="325px"></a>'; 	
-	$auto=0;
-}else{
-	$user_profile = $facebook->api('/me?fields=id,first_name,last_name,email,gender,locale,picture,age_range,birthday');
-    $dobarr=explode('/',$user_profile['birthday']);
-   
-	$user = new Users();
-	$user_data=$user_profile;
-	$user_data = $user->checkUser('facebook',$user_profile['id'],$user_profile['first_name'],$user_profile['last_name'],$user_profile['email'],$user_profile['gender'],$user_profile['locale'],$user_profile['picture']['data']['url'],$user_profile['birthday']);
-$auto=1;
-
-$facebook->destroySession();
-
-
-}
-?>
-
-
-
-<!DOCTYPE html>
-<html>
-
-  <head>
-  <!-- Facebook Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
-document,'script','//connect.facebook.net/en_US/fbevents.js');
-
-fbq('init', '1029499667072975');
-fbq('track', "PageView");</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=1029499667072975&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Facebook Pixel Code -->
-    <title>BestFitMe.com</title>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link href="images/favicon.ico" rel="shortcut icon">
-    <!-- material design lite -->
-    <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.indigo-pink.min.css">
-    <script src="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.min.js"></script>
-    <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-74624110-1', 'auto');
-  ga('send', 'pageview');
-
-</script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-
-    <!-- bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-
-    <link rel="stylesheet" href="style.css">
-  </head>
-
-
-<body>
-  
-<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-
-  <header class="mdl-layout__header">
-    <div>
-    <h1>Your Personal Details</h1>    
-    </div>  
-
-  </header>
-
-</div>
-
-
-<?php
-
-if(isset($_POST['x_InsuranceType'])){
-
-if($_POST['x_C1Title']=='Mr'){
-	$gender=1;
-}else{
-	$gender =0;
-}
-$yearcritical=explode(' ',$_POST['x_CoverYears']);
-$url = 'https://abcdef.com';
-$fields = array(
-	'strLeadType' => urlencode($_POST['x_InsuranceType']),
-	'strCoverAmount' => urlencode($_POST['x_CoverAmount']),
-	'strCoverAmountUnsure' => urlencode('0'),
-	'strApplicantType' => urlencode($_POST['application']),
-	'strCriticalIllness' => urlencode($_POST['x_CoverType']),
-	'strTermYears' => urlencode($yearcritical[0]),
-	'strAffiliateID' => urlencode(10479),
-	'strNameTitle' => urlencode($_POST['x_C1Title']),
-	'strFirstName' => urlencode($_POST['x_C1Forename']),
-	'strSurname' => urlencode($_POST['x_C1Surname']),
-	'strAdr1' => urlencode($_POST['x_C1HouseNumber']),
-	'strAdr2' => urlencode($_POST['x_C1HouseFlatName']),
-	'strTown' => urlencode($_POST['x_C1Street']),
-	'strCounty' => urlencode(''),
-	'strHomePhone' => urlencode($_POST['x_C1MobilePhoneNo']),
-	'strWorkPhone' => urlencode($_POST['x_C1MobilePhoneNo']),
-	'strMobilePhone' => urlencode($_POST['x_C1MobilePhoneNo']),
-	'strEmail' => urlencode($_POST['x_C1Email']),
-	'strOtherInfo' => urlencode(''),
-	'strPassword'=> urlencode(''),
-	'strPostcode' => urlencode($_POST['x_C1Postcode']),
-	'strFillAddress' => urlencode($_POST['x_C1HouseNumber']),
-	'strPageFormURL'=>urlencode('http://lifeinsuranceportal.co.uk/'),
-	'strTrackingCode'=>urlencode('2221'),
-	'strKeyword'=>urlencode('lifeinsurance'),
-	'strApplicant1Gender' => urlencode($gender),
-	'strApplicant1Smoker' => urlencode($_POST['x_C1Smoker']),
-	'strApplicant1DOBDayP' => urlencode($_POST['x_C1DOB_day']),
-	'strApplicant1DOBMonthP' => urlencode($_POST['x_C1DOB_month']),
-	'strApplicant1DOBYearP' => urlencode($_POST['x_C1DOB_year']),
-	'strApplicant2Smoker' => urlencode(""),
-	'strApplicant2DOBDayP' => urlencode(""),
-	'strApplicant2DOBMonthP' => urlencode($_POST['x_C1DOB_month']),
-	'strApplicant2DOBYearP' => urlencode($_POST['x_C1DOB_year']),
-	'strApplicant2Gender' => urlencode(''),
-	'strApplicant1Profession' => urlencode('-1'),
-	'strApplicant2Profession' => urlencode(-1),
-	'strIPAddress' => urlencode($_POST['IPAddress'])	
-);
-
-$fields_string ='';
-//url-ify the data for the POST
-foreach($fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
-rtrim($fields_string, '&');
-
- $finalurl=$url.'?'.$fields_string;
-$curl = curl_init();
-// Set some options - we are passing in a useragent too here
-curl_setopt_array($curl, array(
-    CURLOPT_RETURNTRANSFER => 1,
-    CURLOPT_URL => $finalurl
-));
-// Send the request & save response to $resp
-$resp = curl_exec($curl);
-// Close request to clear up some resources
-curl_close($curl);
-
-$p = xml_parser_create();
-xml_parse_into_struct($p, $resp, $vals, $index);
-xml_parser_free($p);
-
-if($vals[1]['value']==0){
-   	?> <script> window.location="http://bestfitme.com/thank-you.html";</script>
-<?php  
-    
-}
-	
-}
-     
-if(@$submit){	
-	//include("files/life-insurance-brain.php");
-}
-else{
-// Show the form:
-
-?>
-          
-		  
 <main class="mdl-layout__content">
   <div class="page-content">
     <main class="main container">
-        
-        <form  action="<?php echo $_SERVER['PHP_SELF']?>" method="post" >
-           
-          <?php echo $output; ?>
 
           <div class="form-divider">
             <label class="radio-inline">
@@ -212,12 +30,12 @@ else{
 
           <div class="form-group form-user">
               <label for="exampleInputEmail1">First Name</label>
-              <input type="text" class="form-control" name="x_C1Forename"   id="x_C1Forename" value="<?php echo @$user_profile['first_name'];?>" placeholder="t.ex. Jian Hong">
+              <input type="text" class="form-control" name="x_C1Forename"   id="x_C1Forename" placeholder="t.ex. Jian Hong">
           </div>
 
           <div class="form-group form-user">
               <label for="exampleInputEmail1">Last Name</label>
-              <input type="text" class="form-control" id="x_C1Surname"  name="x_C1Surname"   value="<?php echo @$user_profile['last_name'];?>" placeholder="t.ex. Lim">
+              <input type="text" class="form-control" id="x_C1Surname"  name="x_C1Surname" placeholder="t.ex. Lim">
             </div>
 
           <div class="form-row">
@@ -236,62 +54,64 @@ else{
               <div class="form-row2">
                 <select class="form-control form-select" name="x_C1DOB_day">
                       <option value="">Day</option>
-                              <option value="01" <?php if($dobarr[1]=='01'){ ?> selected="selected" <?php } ?> >01</option>
-                              <option value="02" <?php if($dobarr[1]=='02'){ ?> selected="selected" <?php } ?> >02</option>
-                              <option value="03" <?php if($dobarr[1]=='03'){ ?> selected="selected" <?php } ?> >03</option>
-                              <option value="04" <?php if($dobarr[1]=='04'){ ?> selected="selected" <?php } ?> >04</option>
-                              <option value="05" <?php if($dobarr[1]=='05'){ ?> selected="selected" <?php } ?> >05</option>
-                              <option value="06" <?php if($dobarr[1]=='06'){ ?> selected="selected" <?php } ?> >06</option>
-                              <option value="07" <?php if($dobarr[1]=='07'){ ?> selected="selected" <?php } ?> >07</option>
-                              <option value="08" <?php if($dobarr[1]=='08'){ ?> selected="selected" <?php } ?> >08</option>
-                              <option value="09" <?php if($dobarr[1]=='09'){ ?> selected="selected" <?php } ?> >09</option>
-                              <option value="10" <?php if($dobarr[1]=='10'){ ?> selected="selected" <?php } ?> >10</option>
-                              <option value="11" <?php if($dobarr[1]=='11'){ ?> selected="selected" <?php } ?> >11</option>
-                              <option value="12" <?php if($dobarr[1]=='12'){ ?> selected="selected" <?php } ?> >12</option>
-                              <option value="13" <?php if($dobarr[1]=='13'){ ?> selected="selected" <?php } ?> >13</option>
-                              <option value="14" <?php if($dobarr[1]=='14'){ ?> selected="selected" <?php } ?> >14</option>
-                              <option value="15" <?php if($dobarr[1]=='15'){ ?> selected="selected" <?php } ?> >15</option>
-                              <option value="16" <?php if($dobarr[1]=='16'){ ?> selected="selected" <?php } ?> >16</option>
-                              <option value="17" <?php if($dobarr[1]=='17'){ ?> selected="selected" <?php } ?> >17</option>
-                              <option value="18" <?php if($dobarr[1]=='18'){ ?> selected="selected" <?php } ?> >18</option>
-                              <option value="19" <?php if($dobarr[1]=='19'){ ?> selected="selected" <?php } ?> >19</option>
-                              <option value="20" <?php if($dobarr[1]=='20'){ ?> selected="selected" <?php } ?> >20</option>
-                              <option value="21" <?php if($dobarr[1]=='21'){ ?> selected="selected" <?php } ?> >21</option>
-                              <option value="22" <?php if($dobarr[1]=='22'){ ?> selected="selected" <?php } ?> >22</option>
-                              <option value="23" <?php if($dobarr[1]=='23'){ ?> selected="selected" <?php } ?> >23</option>
-                              <option value="24" <?php if($dobarr[1]=='24'){ ?> selected="selected" <?php } ?> >24</option>
-                              <option value="25" <?php if($dobarr[1]=='25'){ ?> selected="selected" <?php } ?> >25</option>
-                              <option value="26" <?php if($dobarr[1]=='26'){ ?> selected="selected" <?php } ?> >26</option>
-                              <option value="27" <?php if($dobarr[1]=='27'){ ?> selected="selected" <?php } ?> >27</option>
-                              <option value="28" <?php if($dobarr[1]=='28'){ ?> selected="selected" <?php } ?> >28</option>
-                              <option value="29" <?php if($dobarr[1]=='29'){ ?> selected="selected" <?php } ?> >29</option>
-                              <option value="30" <?php if($dobarr[1]=='30'){ ?> selected="selected" <?php } ?> >30</option>
-                              <option value="31" <?php if($dobarr[1]=='31'){ ?> selected="selected" <?php } ?> >31</option>
+                              <option value="01" >01</option>
+                              <option value="02" >02</option>
+                              <option value="03" >03</option>
+                              <option value="04" >04</option>
+                              <option value="05" >05</option>
+                              <option value="06" >06</option>
+                              <option value="07" >07</option>
+                              <option value="08" >08</option>
+                              <option value="09" >09</option>
+                              <option value="10" >10</option>
+                              <option value="11" >11</option>
+                              <option value="11" >12</option>
+                              <option value="11" >13</option>
+                              <option value="11" >14</option>
+                              <option value="11" >15</option>
+                              <option value="11" >16</option>
+                              <option value="11" >17</option>
+                              <option value="11" >18</option>
+                              <option value="11" >19</option>
+                              <option value="11" >20</option>
+                              <option value="11" >21</option>
+                              <option value="11" >22</option>
+                              <option value="11" >23</option>
+                              <option value="11" >24</option>
+                              <option value="11" >25</option>
+                              <option value="11" >26</option>
+                              <option value="11" >27</option>
+                              <option value="11" >28</option>
+                              <option value="11" >29</option>
+                              <option value="11" >30</option>
+                              <option value="11" >31</option>
                 </select>
 
                 <select class="form-control form-select" name="x_C1DOB_month">
                    <option value="">Month</option>
-                              <option value="01"  <?php if($dobarr[0]=='01'){ ?> selected="selected" <?php } ?>  >Jan</option>
-                              <option value="02"  <?php if($dobarr[0]=='02'){ ?> selected="selected" <?php } ?>  >Feb</option>
-                              <option value="03"  <?php if($dobarr[0]=='03'){ ?> selected="selected" <?php } ?>    >Mar</option>
-                              <option value="04"  <?php if($dobarr[0]=='04'){ ?> selected="selected" <?php } ?>   >Apr</option>
-                              <option value="05"  <?php if($dobarr[0]=='05'){ ?> selected="selected" <?php } ?>   >May</option>
-                              <option value="06"  <?php if($dobarr[0]=='06'){ ?> selected="selected" <?php } ?>   >Jun</option>
-                              <option value="07"  <?php if($dobarr[0]=='07'){ ?> selected="selected" <?php } ?>   >Jul</option>
-                              <option value="08"  <?php if($dobarr[0]=='08'){ ?> selected="selected" <?php } ?>   >Aug</option>
-                              <option value="09"  <?php if($dobarr[0]=='09'){ ?> selected="selected" <?php } ?>   >Sep</option>
-                              <option value="10"  <?php if($dobarr[0]=='10'){ ?> selected="selected" <?php } ?>   >Oct</option>
-                              <option value="11"  <?php if($dobarr[0]=='11'){ ?> selected="selected" <?php } ?>   >Nov</option>
-                              <option value="12"  <?php if($dobarr[0]=='12'){ ?> selected="selected" <?php } ?>    >Dec</option>
+                              <option value="01" >Jan</option>
+                              <option value="02" >Feb</option>
+                              <option value="03" >Mar</option>
+                              <option value="04" >Apr</option>
+                              <option value="05" >May</option>
+                              <option value="06" >Jun</option>
+                              <option value="07" >Jul</option>
+                              <option value="08" >Aug</option>
+                              <option value="09" >Sep</option>
+                              <option value="10" >Oct</option>
+                              <option value="11" >Nov</option>
+                              <option value="12" >Dec</option>
                 </select>
 
                 <select class="form-control form-select"  name="x_C1DOB_year" >
                   <option value="">Year</option>
-                  <?php 
-                  for($i=2000;$i>1899;$i--){?>
-                       <option value="<?php echo $i ;?>"    <?php if($dobarr[2]==$i){ ?> selected="selected" <?php } ?>    ><?php echo $i ;?></option>
-                      
-                <?php }
+                              <option value="1990" >1990</option>
+                              <option value="1991" >1991</option>
+                              <option value="1992" >1992</option>
+                              <option value="1993" >1993</option>
+                              <option value="1994" >1994</option>
+                              <option value="1995" >1995</option>
+                              <option value="1996" >1996</option>
                   
                   ?>
                            
@@ -330,7 +150,7 @@ else{
             </div>
             <div class="form-group">
               <label for="exampleInputEmail1">Email Address</label>
-              <input type="text" class="form-control" name="x_C1Email" value="<?php echo @$user_profile['email'];?>">
+              <input type="text" class="form-control" name="x_C1Email" placeholder="t.ex. example@gmail.com">
             </div>
           </div>
 
@@ -363,9 +183,7 @@ else{
 </main>
 
 
-<?php } ?>
-  
-</body>
-</html>
-  
+{% endblock %}
+
 		  
+
