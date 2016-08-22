@@ -5,8 +5,8 @@ import typing
 from bestfit.recommender import DAG
 
 
-T = TypeVar("T")
-S = TypeVar("S")
+T = typing.TypeVar("T")
+S = typing.TypeVar("S")
 
 
 class QuestionBase(typing.Generic[S, T]):
@@ -26,7 +26,6 @@ class QuestionBase(typing.Generic[S, T]):
         """
 
     @abc.abstractmethod
-    @property
     def total_answer_klasses(self) -> int:
         """
         Returns the number of possible answer classes.
@@ -39,6 +38,9 @@ MCQQuestionBase = collections.namedtuple("MCQQuestionBase",
 
 class MCQQuestion(QuestionBase, MCQQuestionBase):
 
+    def __new__(cls, *args, **kwargs):
+        return MCQQuestionBase.__new__(cls, *args, **kwargs)
+
     def classify_answer(self, answer) -> int:
         return self.choices.index(answer)
 
@@ -47,11 +49,12 @@ class MCQQuestion(QuestionBase, MCQQuestionBase):
 
 
 class QuestionRule(object):
+
     def __init__(
             self,
             node: DAG.Node,
-            question: Question,
-            answer_mapping: list[Node]):
+            question: QuestionBase,
+            answer_mapping: typing.List[DAG.Node]):
         """
         Args:
             node: The node to bind this question to.
@@ -74,7 +77,7 @@ class QuestionRule(object):
         # wrong with out graph structure.
 
         for child in node.children:
-            assert child in dest_nodes
+            assert child in answer_mapping
 
     @property
     def question(self):
@@ -85,15 +88,20 @@ class QuestionRule(object):
 
 
 def register_rule(node, question, answer_mapping):
-    rule = question.QuestionRule(
+    rule = QuestionRule(
             node=node, question=question, answer_mapping=answer_mapping)
     node.set_value(rule)
 
 
 class QuestionGraphTransverser(DAG.Transverser):
 
-    def __init__(self):
+    def __init__(self, node: DAG.Node):
+        self._current_node = node
         self._path = []
+
+    @property
+    def current_node(self):
+        return self._current_node
 
     def transverse(self, answer):
         if self.is_at_leaf:
@@ -103,7 +111,6 @@ class QuestionGraphTransverser(DAG.Transverser):
         self._path.append((self._current_node.value.question,
                            answer))
         self._current_node = next_node
-        return self._current_node
 
     def is_at_leaf(self):
         return self._current_node.is_at_leaf

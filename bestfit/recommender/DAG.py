@@ -36,7 +36,7 @@ class Node(typing.Generic[T]):
 
     def add_child(self, node):
         self._children.append(node)
-        self._is_leaf = false;
+        self._is_leaf = False;
 
     def freeze_structure(self):
         self.add_child = disabled_function
@@ -53,4 +53,4 @@ class Transverser(object):
 
     @abc.abstractmethod
     def is_at_leaf(self) -> bool:
-        """Returns true if the transverser is at a leaf node"""
+        """Returns True if the transverser is at a leaf node"""

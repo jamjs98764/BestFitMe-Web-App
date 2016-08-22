@@ -5,10 +5,10 @@ from django.db import models
 from policies.models import company
 
 
-class Policy(models.Model):
+class HealthPolicy(models.Model):
 
     name = models.CharField(max_length=200)
-    company = Ref[]
+    company = models.OneToOneField(company.Company)
     description = models.TextField()
     clinic_gp_cover = models.IntegerField()
     accident_cover = models.IntegerField()
@@ -17,8 +17,8 @@ class Policy(models.Model):
     overseas_cover = 1
 
 
-class Order(models.Model):
+class HealthOrder(models.Model):
 
     hospital_admission_cover = models.BooleanField()
     long_term_care = models.BooleanField()
-    policy = models.OneToOneField(Policy)
+    policy = models.OneToOneField(HealthPolicy)
