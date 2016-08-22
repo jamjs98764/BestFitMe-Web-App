@@ -1,44 +1,44 @@
 """Policy question and answer graph for health insurance."""
 
 from bestfit.recommender import DAG
-from bestfit.recommender import question as reco_question
+from bestfit.recommender import question_dag
 
 
 # ======================================================
 # ============= Questions that we will ask =============
 # ======================================================
 
-age_question = reco_question.MCQQuestion(
+age_question = question_dag.MCQQuestion(
         name="age",
         question="Are you younger or older than 35 years of age?",
         description="Age of the user",
         choices=["> 35 years old", "<= 35 years old"])
 
-overseas_cover_question = reco_question.MCQQuestion(
+overseas_cover_question = question_dag.MCQQuestion(
         name="overseas_cover",
         question="Do you want overseas cover",
         description="International protection",
         choices=["No", "Yes"])
 
-extend_to_children_question = reco_question.MCQQuestion(
+extend_to_children_question = question_dag.MCQQuestion(
         name="extend_to_children",
         question="Do you want to extend your cover to your children?",
         description="In case the children is injured",
         choices=["No", "Yes"])
 
-family_question = reco_question.MCQQuestion(
+family_question = question_dag.MCQQuestion(
         name="family",
         question="Have you established a family?",
         description="Are you married",
         choices=["No", "Yes"])
 
-joint_policy_question = reco_question.MCQQuestion(
+joint_policy_question = question_dag.MCQQuestion(
         name="joint_policy",
         question="Are you interested in a joint policy?",
         description="Joint policy",
         choices=["No", "Yes"])
 
-emergency_case_cover_question = reco_question.MCQQuestion(
+emergency_case_cover_question = question_dag.MCQQuestion(
         name="emergency_case_cover",
         question="Do you want emergency case cover",
         description="lorem ipsum",
@@ -85,7 +85,7 @@ def _construct_tree():
         (n5_0, overseas_cover_question, [exit_node, exit_node])]
 
     for node, question, answer_mapping in rule_args:
-        reco_question.register_rule(node=node,
+        question_dag.register_rule(node=node,
                                     question=question,
                                     answer_mapping=answer_mapping)
 

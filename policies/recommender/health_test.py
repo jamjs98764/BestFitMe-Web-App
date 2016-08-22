@@ -2,7 +2,7 @@
 
 import unittest
 
-from bestfit.recommender import question as question_helper
+from bestfit.recommender import question_dag
 
 from policies.recommender import health as recommender_health
 
@@ -10,7 +10,7 @@ from policies.recommender import health as recommender_health
 class TestAnswerTransversal(unittest.TestCase):
 
     def setUp(self):
-        self.graph = question_helper.QuestionGraphTransverser(
+        self.graph = question_dag.QuestionGraphTransverser(
                 recommender_health.decision_graph)
 
     def assert_head_question_equals(self, graph, question):

@@ -1,3 +1,5 @@
+"""Classes, tools and functions for constructing question graphs."""
+
 import abc
 import collections
 import typing
@@ -87,7 +89,9 @@ class QuestionRule(object):
         return self._answer_mapping[self._question.classify_answer(answer)]
 
 
-def register_rule(node, question, answer_mapping):
+def register_rule(node: DAG.Node,
+                  question: QuestionBase,
+                  answer_mapping: typing.List[DAG.Node]):
     rule = QuestionRule(
             node=node, question=question, answer_mapping=answer_mapping)
     node.set_value(rule)
