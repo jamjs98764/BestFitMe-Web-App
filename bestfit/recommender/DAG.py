@@ -14,9 +14,8 @@ def disabled_function(*args, **kwargs):
 class Node(typing.Generic[T]):
     """An abc representing a Node."""
 
-    def __init__(self, value):
+    def __init__(self):
         self._children = []
-        self._value = None
         self._is_leaf = True
 
     @property
@@ -39,7 +38,7 @@ class Node(typing.Generic[T]):
         self._children.append(node)
         self._is_leaf = false;
 
-    def freeze_structure(self, node):
+    def freeze_structure(self):
         self.add_child = disabled_function
 
 

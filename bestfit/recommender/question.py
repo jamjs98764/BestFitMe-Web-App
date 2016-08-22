@@ -34,7 +34,7 @@ class QuestionBase(typing.Generic[S, T]):
 
 
 MCQQuestionBase = collections.namedtuple("MCQQuestionBase",
-        ["name", "description", "choices"])
+        ["name", "question", "description", "choices"])
 
 
 class MCQQuestion(QuestionBase, MCQQuestionBase):
@@ -46,13 +46,12 @@ class MCQQuestion(QuestionBase, MCQQuestionBase):
         return len(self.choices)
 
 
-
 class QuestionRule(object):
     def __init__(
             self,
             node: DAG.Node,
             question: Question,
-            answer_mapping: dict[int, Node]):
+            answer_mapping: list[Node]):
         """
         Args:
             node: The node to bind this question to.
@@ -67,17 +66,14 @@ class QuestionRule(object):
         self._answer_mapping = answer_mapping
 
         # All of the answer mapping nodes
-        for answer_klass, dest_node in answer_mapping:
+        for dest_node in answer_mapping:
             assert dest_node in node.children
-            assert answer_klass >= 0
-            assert answer_klass < question.total_answer_klasses
 
-        dest_nodes = set(dest_node for _, dest_node in answer_mapping)
-        
         # make sure that all the destination childrens are covered.
         # If it isn't, that means there is probably something
         # wrong with out graph structure.
-        for child in hold.children:
+
+        for child in node.children:
             assert child in dest_nodes
 
     @property
@@ -88,7 +84,17 @@ class QuestionRule(object):
         return self._answer_mapping[self._question.classify_answer(answer)]
 
 
+def register_rule(node, question, answer_mapping):
+    rule = question.QuestionRule(
+            node=node, question=question, answer_mapping=answer_mapping)
+    node.set_value(rule)
+
+
 class QuestionGraphTransverser(DAG.Transverser):
+
+    def __init__(self):
+        self._path = []
+
     def transverse(self, answer):
         if self.is_at_leaf:
             return None
