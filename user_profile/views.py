@@ -6,23 +6,6 @@ from django.shortcuts import render, HttpResponseRedirect
 
 # Create your views here.
 
-from accounts.forms import UserAddressForm
-from accounts.models import UserAddress
-from carts.models import Cart
-
-from .models import Order
-from .utils import id_generator
-
-try:
-	stripe_pub = settings.STRIPE_PUBLISHABLE_KEY
-	stripe_secret = settings.STRIPE_SECRET_KEY
-except Exception, e:
-	print str(e)
-	raise NotImplementedError(str(e))
-
-
-stripe.api_key = stripe_secret
-
 
 def orders(request):
 	context = {}

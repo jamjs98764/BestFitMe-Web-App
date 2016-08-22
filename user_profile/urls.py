@@ -3,8 +3,8 @@ from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
 
-from user_profiles import views
+from user_profile import views
 
 urlpatterns = [
-    url(r'^form/$', views.ProductSearchView.as_view(), name='products_search')
+    url(r'^form/$', views.checkout)
 ]
