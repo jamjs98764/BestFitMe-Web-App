@@ -6,5 +6,5 @@ from django.contrib import admin
 from user_profile import views
 
 urlpatterns = [
-    url(r'^form/$', views.checkout)
+    url(r'^form/$', views.display, name ="display")
 ]
