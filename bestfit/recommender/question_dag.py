@@ -107,14 +107,18 @@ class QuestionGraphTransverser(DAG.Transverser):
     def current_node(self):
         return self._current_node
 
+    @property
+    def current_question(self) -> QuestionBase:
+        return self._current_node.value.question
+
+    def is_at_leaf(self):
+        return self._current_node.is_leaf
+
     def transverse(self, answer):
-        if self.is_at_leaf:
+        if self.is_at_leaf():
             return None
 
-        next_node = self._current_node.value.next_node(self, answer)
+        next_node = self._current_node.value.next_node(answer)
         self._path.append((self._current_node.value.question,
                            answer))
         self._current_node = next_node
-
-    def is_at_leaf(self):
-        return self._current_node.is_at_leaf
