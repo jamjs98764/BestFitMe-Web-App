@@ -1,4 +1,4 @@
-"""Policy question and answer graph for health insurance."""
+"""Policy question DAG for health insurance."""
 
 from bestfit.recommender import DAG
 from bestfit.recommender import question_dag
